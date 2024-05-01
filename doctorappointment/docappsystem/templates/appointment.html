@@ -94,14 +94,56 @@
                                 <input type="text" class="form-control border-0" placeholder="Your Mobile" style="height: 55px;" name="mobilenumber" maxlength="10" required="true">
                             </div>
                             <div class="col-12 col-sm-6">
-                                <select class="form-select border-0" style="height: 55px;" name="doctor_id" required="true">
-                                    <option selected>Choose Doctor</option>
-                                    {% for doctor in doctorview %}
-        <option value="{{ doctor.id }}">{{ doctor.admin.first_name }} {{ doctor.admin.last_name }}({{ doctor.specialization_id.sname }})</option>
-    {% endfor %}
-                                    
+                                <select class="form-select border-0" style="height: 55px;" id="specialization_select" required="true">
+                                    <option selected>Choose Specialization</option>
+                                    {% for specialization in specializations %}
+                                        <option value="{{ specialization.id }}">{{ specialization.name }}</option>
+                                    {% endfor %}
                                 </select>
                             </div>
+                            
+                            <div class="col-12 col-sm-6">
+                                <select class="form-select border-0" style="height: 55px;" id="doctor_select" name="doctor_id" required="true" disabled>
+                                    <option selected>Choose Doctor</option>
+                                </select>
+                            </div>
+                            
+                            <script>
+                                // Function to fetch doctors based on selected specialization
+                                function fetchDoctorsBySpecialization(specializationId) {
+                                    // Make an AJAX request to fetch doctors based on the selected specialization
+                                    // Replace the URL with the actual endpoint to fetch doctors by specialization
+                                    fetch(`/get-doctors?specialization=${specializationId}`)
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            const doctorSelect = document.getElementById('doctor_select');
+                                            doctorSelect.innerHTML = '<option selected>Choose Doctor</option>';
+                                            data.forEach(doctor => {
+                                                const option = document.createElement('option');
+                                                option.value = doctor.id;
+                                                option.textContent = `${doctor.first_name} ${doctor.last_name}`;
+                                                doctorSelect.appendChild(option);
+                                            });
+                                            // Enable the doctor select dropdown
+                                            doctorSelect.disabled = false;
+                                        })
+                                        .catch(error => console.error('Error fetching doctors:', error));
+                                }
+                            
+                                // Event listener for specialization select change
+                                document.getElementById('specialization_select').addEventListener('change', function () {
+                                    const specializationId = this.value;
+                                    if (specializationId !== 'Choose Specialization') {
+                                        fetchDoctorsBySpecialization(specializationId);
+                                    } else {
+                                        // If "Choose Specialization" is selected, disable and reset the doctor select dropdown
+                                        const doctorSelect = document.getElementById('doctor_select');
+                                        doctorSelect.innerHTML = '<option selected>Choose Doctor</option>';
+                                        doctorSelect.disabled = true;
+                                    }
+                                });
+                            </script>
+                            
                             <div class="col-12 col-sm-6">
                                 <div class="date" id="date" data-target-input="nearest">
                                     <input type="date"
