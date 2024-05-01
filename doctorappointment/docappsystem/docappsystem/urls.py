@@ -64,19 +64,17 @@ urlpatterns = [
       path('BetweenDateReport', docviews.Between_Date_Report, name='between_date_report'),
 
     #This is User Panel
-    path('userbase/', userviews.USERBASE, name='userbase'),
-    path('', userviews.Index, name='index'),
-    
-    
-    path('userappointment/', userviews.create_appointment, name='appointment'),
-    path('User_SearchAppointment', userviews.User_Search_Appointments, name='user_search_appointment'),
-    path('ViewAppointmentDetails/<str:id>/', userviews.View_Appointment_Details, name='viewappointmentdetails'),
-    
- 
-    
-    
-
-
+    #path('usersignup/', userviews.USERSIGNUP, name='usersignup'),
+    #path('User/UserHome', userviews.USERHOME, name='user_home'),
+    #path('User/AddPatient', userviews.AddPatient, name='add_patient'),
+    #path('User/PatientDetails/<str:id>', userviews.Patient_Details, name='patientdetails'),
+    #path('User/UpdatePatientDetails/<str:id>', userviews.Update_Patient_Details, name='update_patient_details'),
+    #path('userbase/', userviews.USERBASE, name='userbase'),
+    #path('', userviews.Index, name='index'), 
+    #path('user/CreateAppointment/', userviews.create_appointment, name='create_appointment'),
+    #path('User/SearchAppointment', userviews.User_Search_Appointments, name='user_search_appointment'),
+    #path('User/EditAppointment', userviews.User_Edit_Appointment, name='user_edit_appointment'),
+    #path('User/EditAppointment', userviews.User_Edit_Appointment, name='user_edit_appointment'),
 
     #profile path
     path('Profile', views.PROFILE, name='profile'),
