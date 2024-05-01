@@ -249,7 +249,7 @@ CREATE TABLE `dasapp_page` (
 --
 
 INSERT INTO `dasapp_page` (`id`, `pagetitle`, `address`, `aboutus`, `email`, `mobilenumber`, `created_at`, `updated_at`) VALUES
-(1, 'Webpage Details', 'H-890, Ajanta Apartment', 'There are around 60 medical specialties and 30 subspecialties that make it harder for doctors to choose their specialization. Based on interest, doctors can choose their medical specialties. However, there are aspects like demand, scope, salary, and availability of the PG medical seat.\r\n\r\nIn such a situation, decision-making would be a tougher job. However, your decision is crucial to can set up a rewarding or dismaying career. Thus, be careful while choosing your medical specialties. The medical courses listed below are in high demand and have a greater scope in India.', 'support@gmail.com', 1234567890, '0000-00-00 00:00:00.000000', '2024-02-26 06:39:16.446263');
+(1, 'Webpage Details', 'Goa University', 'There are around 60 medical specialties and 30 subspecialties that make it harder for doctors to choose their specialization. Based on interest, doctors can choose their medical specialties. However, there are aspects like demand, scope, salary, and availability of the PG medical seat.\r\n\r\nIn such a situation, decision-making would be a tougher job. However, your decision is crucial to can set up a rewarding or dismaying career. Thus, be careful while choosing your medical specialties. The medical courses listed below are in high demand and have a greater scope in India.', 'gu@unigoa.com', 1234567890, '0000-00-00 00:00:00.000000', '2024-02-26 06:39:16.446263');
 
 -- --------------------------------------------------------
 
@@ -278,7 +278,7 @@ INSERT INTO `dasapp_specialization` (`id`, `sname`, `created_at`, `updated_at`) 
 (7, 'General Surgery', '2024-02-26 06:25:09.110658', '2024-02-26 06:25:09.110658'),
 (8, 'Ophthalmology', '2024-02-26 06:25:16.661938', '2024-02-26 06:25:16.662934'),
 (9, 'Family Medicine', '2024-02-26 06:25:27.502854', '2024-02-26 06:25:27.502854'),
-(10, 'Chest Medicine', '2024-02-26 06:25:42.886345', '2024-02-26 06:25:42.886345'),
+(10, 'Respiratory Medicine', '2024-02-26 06:25:42.886345', '2024-02-26 06:25:42.886345'),
 (11, 'Anesthesia', '2024-02-26 06:25:50.029827', '2024-02-26 06:25:50.029827'),
 (12, 'Pathology', '2024-02-26 06:25:58.369617', '2024-02-26 06:25:58.369617'),
 (13, 'ENT', '2024-02-26 06:26:05.020793', '2024-02-26 06:26:05.020793');
