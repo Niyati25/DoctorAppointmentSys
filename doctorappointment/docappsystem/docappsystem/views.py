@@ -20,18 +20,20 @@ def doLogout(request):
 def doLogin(request):
     if request.method == 'POST':
         user = EmailBackEnd.authenticate(request,
-                                         username=request.POST.get('email'),
-                                         password=request.POST.get('password')
-                                         )
+                                        username=request.POST.get('email'),
+                                        password=request.POST.get('password')
+                                        )
         if user!=None:
             login(request,user)
             user_type = user.user_type
             if user_type == '1':
-                 return redirect('admin_home')
+                return redirect('admin_home')
             elif user_type == '2':
-                 return redirect('doctor_home')
+                return redirect('doctor_home')
             elif user_type == '3':
-                return HttpResponse("This is User panel")
+                return redirect('user_home')
+            elif user_type == '4':
+                return HttpResponse("User not identified")
             
             
         else:
@@ -68,7 +70,7 @@ def PROFILE_UPDATE(request):
 
             
             if profile_pic !=None and profile_pic != "":
-               customuser.profile_pic = profile_pic
+                customuser.profile_pic = profile_pic
             customuser.save()
             messages.success(request,"Your profile has been updated successfully")
             return redirect('profile')
@@ -79,25 +81,25 @@ def PROFILE_UPDATE(request):
 
 
 def CHANGE_PASSWORD(request):
-     context ={}
-     ch = User.objects.filter(id = request.user.id)
-     
-     if len(ch)>0:
+    context ={}
+    ch = User.objects.filter(id = request.user.id)
+    
+    if len(ch)>0:
             data = User.objects.get(id = request.user.id)
             context["data"]:data            
-     if request.method == "POST":        
+    if request.method == "POST":        
         current = request.POST["cpwd"]
         new_pas = request.POST['npwd']
         user = User.objects.get(id = request.user.id)
         un = user.username
         check = user.check_password(current)
         if check == True:
-          user.set_password(new_pas)
-          user.save()
-          messages.success(request,'Password Change  Succeesfully!!!')
-          user = User.objects.get(username=un)
-          login(request,user)
+            user.set_password(new_pas)
+            user.save()
+            messages.success(request,'Password Change  Succeesfully!!!')
+            user = User.objects.get(username=un)
+            login(request,user)
         else:
-          messages.success(request,'Current Password wrong!!!')
-          return redirect("change_password")
-     return render(request,'change-password.html')
+            messages.success(request,'Current Password wrong!!!')
+            return redirect("change_password")
+    return render(request,'change-password.html')
