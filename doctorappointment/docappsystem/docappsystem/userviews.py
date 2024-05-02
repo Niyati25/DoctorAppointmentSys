@@ -8,7 +8,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .models import Appointment
 from .forms import AppointmentForm  # Import the form for creating an appointment
 
-def usersignup()
+def usersignup():
     if request.method == "POST":
         pic = request.FILES.get('pic')
         first_name = request.POST.get('first_name')
@@ -46,10 +46,10 @@ def usersignup()
             )
             doctor.save()            
             messages.success(request,'Signup Successfully')
-            return redirect('docsignup')
+            return redirect('user_signup')
     
 
-    return render(request,'cust/userreg.html',context)
+    return render(request,'cust/user_signup.html',context)
 
 @login_required(login_url='/')
 def USERHOME(request):
@@ -71,12 +71,8 @@ def USERHOME(request):
     return render(request,'cust/userhome.html',context)
 
 
-def Index(request):
-    # Your implementation for the index view here
-    pass
-
 def AddPatient(request):
-        if request.method == "POST":
+    if request.method == "POST":
         # Extract patient details from the form
         first_name = request.POST.get('first_name')
         last_name = request.POST.get('last_name')
@@ -85,19 +81,18 @@ def AddPatient(request):
         # You can add more fields as needed
 
         # Create a new Patient object with the extracted details
-        new_patient = Patient(
-            first_name=first_name,
-            last_name=last_name,
-            email=email,
-            mobile_number=mobile_number,
-            # Assign other fields similarly
-        )
+    new_patient = Patient(
+        first_name=first_name,
+        last_name=last_name,
+        email=email,
+        mobile_number=mobile_number,
+    )
 
         # Save the new patient object to the database
-        new_patient.save()
+    new_patient.save()
 
         # Optionally, you can add a success message
-        messages.success(request, 'Patient added successfully')
+    messages.success(request, 'Patient added successfully')
 
         # Redirect to a success page or any other appropriate page
     return render(request, 'cust/add_patient.html')
@@ -158,25 +153,25 @@ def User_Edit_Appointment(request):
     # Your implementation for editing appointments here
     def User_Edit_Appointment(request, id):
     # Retrieve the appointment object from the database based on the provided ID
-    appointment = get_object_or_404(Appointment, id=id)
+        appointment = get_object_or_404(Appointment, id=id)
 
-    if request.method == "POST":
-        # Create a form instance and populate it with data from the request
-        form = AppointmentForm(request.POST, instance=appointment)
-        
-        # Check if the form is valid
-        if form.is_valid():
-            # Save the updated appointment details to the database
-            form.save()
+        if request.method == "POST":
+            # Create a form instance and populate it with data from the request
+            form = AppointmentForm(request.POST, instance=appointment)
+            
+            # Check if the form is valid
+            if form.is_valid():
+                # Save the updated appointment details to the database
+                form.save()
 
-            # Optionally, you can add a success message
-            messages.success(request, 'Appointment details updated successfully')
+                # Optionally, you can add a success message
+                messages.success(request, 'Appointment details updated successfully')
 
-            # Redirect to the user's appointments page or any other appropriate page
-            return redirect('view_appointment')
-    else:
-        # If it's a GET request, create a form instance with the current appointment data
-        form = AppointmentForm(instance=appointment)
+                # Redirect to the user's appointments page or any other appropriate page
+                return redirect('view_appointment')
+        else:
+            # If it's a GET request, create a form instance with the current appointment data
+            form = AppointmentForm(instance=appointment)
 
     # Render the template with the form for updating appointment details
     return render(request, 'cust/edit_appointment.html', {'form': form})
