@@ -140,20 +140,20 @@ def WEBSITE_UPDATE(request):
 @login_required(login_url='/')
 def UPDATE_WEBSITE_DETAILS(request):
     if request.method == 'POST':
-          web_id = request.POST.get('web_id')
-          pagetitle = request.POST['pagetitle']
-          address = request.POST['address']
-          aboutus = request.POST['aboutus']
-          email = request.POST['email']
-          mobilenumber = request.POST['mobilenumber']
-          page =Page.objects.get(id=web_id)
-          page.pagetitle = pagetitle
-          page.address = address
-          page.aboutus = aboutus
-          page.email = email
-          page.mobilenumber = mobilenumber
-          page.save()
-          messages.success(request,"Your website detail has been updated successfully")
-          return redirect('website_update')
+            web_id = request.POST.get('web_id')
+            pagetitle = request.POST['pagetitle']
+            address = request.POST['address']
+            aboutus = request.POST['aboutus']
+            email = request.POST['email']
+            mobilenumber = request.POST['mobilenumber']
+            page =Page.objects.get(id=web_id)
+            page.pagetitle = pagetitle
+            page.address = address
+            page.aboutus = aboutus
+            page.email = email
+            page.mobilenumber = mobilenumber
+            page.save()
+            messages.success(request,"Your website detail has been updated successfully")
+            return redirect('website_update')
     return render(request,'admin/website.html')
 

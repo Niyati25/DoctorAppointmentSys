@@ -1,0 +1,68 @@
+     <!-- patient_details.html -->
+
+     {% extends 'base.html' %}
+     {% block content %}
+     <div class="content container-fluid">
+     <div class="page-header">
+          <div class="row align-items-center">
+               <div class="col">
+                    <h3 class="page-title">Patient Details</h3>
+                    <ul class="breadcrumb">
+                         <li class="breadcrumb-item"><a href="{% url 'admin_home' %}">Dashboard</a></li>
+                         <li class="breadcrumb-item active">Patient Details</li>
+                    </ul>
+               </div>
+          </div>
+     </div>
+     <div class="row">
+          <div class="col-sm-12">
+               <div class="card card-table">
+                    <div class="card-body">
+                         {% if messages %}
+                         {% for message in messages %}
+                         {% if message.tags == 'error' %}
+                         <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                         {{message}}
+                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                         </button>
+                         </div>
+                         {% endif %}
+                         {% endfor %}
+                         {% endif %}
+                         {% if messages %}
+                         {% for message in messages %}
+                         {% if message.tags == 'success' %}
+                         <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                         {{message}}
+                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                         </button>
+                         </div>
+                         {% endif %}
+                         {% endfor %}
+                         {% endif %}
+                         <div class="table-responsive">
+                         <table class="table table-hover table-center mb-0 datatable">
+                              {% for patient in patient_details %}
+                              <tr>
+                                   <th>Patient Name</th>
+                                   <td>{{ patient.first_name }} {{ patient.last_name }}</td>
+                                   <th>Contact Number</th>
+                                   <td>{{ patient.contact_number }}</td>
+                              </tr>
+                              <tr>
+                                   <th>Email Address</th>
+                                   <td>{{ patient.email }}</td>
+                                   <!-- Add more patient details as needed -->
+                              </tr>
+                              {% endfor %}
+                         </table>
+                         <div class="btn btn-primary"><a href="{% url 'view_patient_list' %}">Back</a></div>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+     </div>
+     {% endblock %}
